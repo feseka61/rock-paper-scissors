@@ -1,6 +1,8 @@
 <script>
     function computerPlay() {
-        const random012 = Math.floor(Math.random() * 3)
+        const random0 = (Math.floor(Math.random() * 31))
+        console.log(random0)
+        const random012 =  random0%3
         if (random012 == 2) {
             return 'rock'
         } else if (random012 == 1) {
@@ -13,9 +15,20 @@
     }
 
     function playRound(playerSelection, computerSelection) {
+
+        if (playerSelection == null) {
+            alert('Please enter a valid value!')
+            return "Empty Input"
+        }
+
         const plyr = playerSelection.toLowerCase();
         const cmptr = computerSelection.toLowerCase();
         let result;
+
+        if (!(plyr == 'rock' || plyr == 'paper' || plyr == 'scissors')) {
+            alert('Please enter a valid value!')
+            return "Wrong Input"
+        }
 
         if (plyr == cmptr) {
             result = 'It is a DRAW!'
@@ -39,10 +52,13 @@
             const computerSelection = computerPlay()
             let winner = playRound(playerSelection, computerSelection);
             console.log(winner)
+
             if (winner.charAt(0) == 'C') {
                 computerCount++
             } else if (winner.charAt(0) == 'P') {
                 playerCount++
+            } else if (winner == 'Wrong Input' || winner == "Empty Input") {
+                i--
             }
             console.log('Player: ' + playerCount + ' Computer: ' + computerCount)
         }
